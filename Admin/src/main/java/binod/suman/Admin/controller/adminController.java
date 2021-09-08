@@ -47,7 +47,7 @@ public class adminController {
 	@GetMapping("/changestatus/{bookId}")
 	public String changeStatus(@PathVariable("bookId") int bookId,Model model)
 	{
-		String postForObject = restTemplate.getForObject(URL+"appointment/paidAppointment/"+bookId, String.class);
+		String postForObject = restTemplate.getForObject(URL+"appointment/payment/"+bookId, String.class);
 		System.out.println(postForObject);
 		List<Appointment> list = restTemplate.getForObject(URL+"appointment/all",List.class, HttpMethod.GET);
 		System.out.println(list);
