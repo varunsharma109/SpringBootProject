@@ -32,7 +32,7 @@
         </div>
     </header> </p>
 	<table border="2" width="70%" cellpadding="2" align="center">
-	<tr><th>BookId</th><th>DoctorName</th><th></th><th>PatientName</th><th>Payment</th><th>Status</th><th>DateTime</th></tr>
+	<tr><th>BookId</th><th>DoctorName</th><th>PatientName</th><th>Payment</th><th>Status</th><th>DateTime</th></tr>
     <c:forEach var="admin" items="${list}"> 
     <tr>
     <td>${admin.bookId}</td>
@@ -41,7 +41,7 @@
     <td>${admin.payment}</td>
     <td>${admin.status}</td>
     <td>${admin.dateTime}</td>
-    <td><a href="changestatus/${admin.bookId}" >Change Status to Paid</a></td>
+    <td><a href="http://localhost:8080/admin/changestatus/${admin.bookId}" >Change Status</a></td>
     </tr>
     </c:forEach> 
     </table>

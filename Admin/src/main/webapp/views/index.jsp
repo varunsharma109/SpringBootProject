@@ -30,9 +30,9 @@
      
        
        
-       <form action="processlogin" method="post">
+       <form action="admin/processlogin" method="post">
             <p><label for="username">Username:</label><br>
-			<input type="email" name="username" /> <br> </p>
+			<input type="email" name="email" /> <br> </p>
 			<p><label for="password">Password:</label><br>
 			<input type="password" name="password" /> <br> </p>
 			<p><input type="submit" value="Log In" /> <br></p>

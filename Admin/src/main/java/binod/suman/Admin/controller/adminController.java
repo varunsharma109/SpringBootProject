@@ -2,6 +2,7 @@ package binod.suman.Admin.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,39 +17,33 @@ import binod.suman.Admin.entity.Appointment;
 
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/")
 public class adminController {
 
+	@Bean
+	public RestTemplate getRestTemplate() {
+		return new RestTemplate();
+	}
+	
 	@Autowired
 	private RestTemplate restTemplate;
 	
 	static final String URL="http://localhost:8085/";
 	
-	@RequestMapping("/")
-	public String home() {
-		return "This is my admin page";
-	}
 	
-	@PostMapping("/processlogin")
-	public String loginProcess(@RequestParam("email") String email,@RequestParam("password") String password,Model model)
+	@GetMapping("/")
+	public String loginProcess(Model model)
 	{
-		if("admin@123".equals(password) && "admin@gmail.com".equals(email))
-		{
-			List<Appointment> list = restTemplate.getForObject(URL+"appointment/all",List.class, HttpMethod.GET);
-			System.out.println(list);
-			model.addAttribute("list", list);
-			return "adminWelcome";
-			
-		}else{
-				return "index";
-		}
+		List<Appointment> list = restTemplate.getForObject(URL+"appointment/all",List.class, HttpMethod.GET);
+		model.addAttribute("list", list);
+		return "adminWelcome";
 	}
 	
-	@GetMapping("/changestatus/{bookId}")
+	@GetMapping("/admin/changestatus/{bookId}")
 	public String changeStatus(@PathVariable("bookId") int bookId,Model model)
 	{
-		String postForObject = restTemplate.getForObject(URL+"appointment/payment/"+bookId, String.class);
-		System.out.println(postForObject);
+		String postForObject1 = restTemplate.getForObject(URL+"appointment/payment/"+bookId, String.class);
+		String postForObject2 = restTemplate.getForObject(URL+"appointment/forwardAppointment/"+bookId, String.class);
 		List<Appointment> list = restTemplate.getForObject(URL+"appointment/all",List.class, HttpMethod.GET);
 		System.out.println(list);
 		
